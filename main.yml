@@ -3,5 +3,30 @@
   gather_facts: no
   become: yes
   tasks:
-    - debug:
-        msg: "Hello from Ansible {{ user_input }}"
+    - block:
+      - debug:
+          msg: "Hello from Ansible {{ user_input }}"
+      
+      - debug:
+          msg: "Installing tomcat role"
+        when: tomcat_install 
+
+      - debug:
+          msg: " creating tomcat user "
+        when: create_tomcat_user
+      tags:
+        - tomcat
+
+    - block:
+      - debug:
+          msg: "Installing Websphere"
+      
+      - debug:
+          msg: "calling websphere role"
+        when: websphere_install 
+
+      - debug:
+          msg: " creating websphere user "
+        when: create_websphere_user
+      tags:
+        - websphere
