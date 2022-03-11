@@ -1,0 +1,18 @@
+---
+  hosts: all
+  become: yes
+  tasks:
+  - name: 
+    stat:
+      path: /tmp/test/pythonscript
+    register: output
+  - name:
+    shell: cat /tmp/test/pythonscript
+  - name: print if file exists
+    debug:
+      msg: file exists
+    when: output.stat.exists
+  - name: print of file missing
+    debug:
+      msg: the file missing
+    when: not output.stat.exists
