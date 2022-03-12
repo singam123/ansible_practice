@@ -7,7 +7,7 @@
   register: status.stdout
   debug: 
   var: status
-  :- name: Start jenkins on port 8000
+  - name: Start jenkins on port 8000
   command: systemctl start jenkins
   debug:
   var: status.stdout
