@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+- name: Checking if Jenkins is running
+  command: systemctl status jenkins
+  register: status
+  debug: 
+    msg: status.stdout
+- name: Start jenkins on port 8000
+  service:
+    name: jenkins
+    enabled: true
+	state: started
+  when: status.stdout
