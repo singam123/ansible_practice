@@ -4,7 +4,7 @@
   tasks:
     - name: Checking if Jenkins is running
       shell: systemctl status jenkins
-      register: status.stdout
+      register: status
     - debug: msg="{{status.stdout}}"
     - name: Start jenkins on port 8000
       shell: systemctl start jenkins
