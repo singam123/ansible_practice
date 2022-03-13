@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Checking if Jenkins is running
+      shell: systemctl status jenkins
+      register: status.stdout
+    - debug: msg="{{status.stdout}}"
+    - name: Start jenkins on port 8000
+      shell: systemctl start jenkins
+      register: startstatus
+    - debug: msg="{{startstatus.stdout}}"
